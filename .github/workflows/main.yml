@@ -53,7 +53,6 @@ jobs:
         # Если её не будет, то тесты могут запуститься раньше, чем сервер PostgreSQL
         # В результате тесты опять решат, что базы нет, — и упадут
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
     # Копируем код проекта
     - name: Check out code
@@ -90,7 +89,6 @@ jobs:
           python -m flake8 backend/
           cd backend/
           python manage.py test
-
   # Добавляем новую задачу: деплой приложения
   build_and_push_to_docker_hub:
     name: Push Docker image to DockerHub
@@ -127,3 +125,4 @@ jobs:
           # устанавливаем тег latest, чтобы потом
           # на сервере и в docker-compose.yml не указывать версию
           tags: ваш-логин-на-docker-hub/taski_backend:latest
+          
